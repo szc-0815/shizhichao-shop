@@ -18,9 +18,9 @@ public class SpecServiceImpl implements SpecService {
 	SpecDao specDao;
 
 	@Override
-	public PageInfo<Spec> list(String name, int pageNum,int pageSize) {
+	public PageInfo<Spec> list(String name, int page) {
 		// TODO Auto-generated method stub
-		PageHelper.startPage(pageNum, pageSize);
+		PageHelper.startPage(page, 3);
 		return new PageInfo<Spec>(specDao.list(name));
 		
 	}
@@ -50,7 +50,20 @@ public class SpecServiceImpl implements SpecService {
 	@Override
 	public int update(Spec spec) {
 		// TODO Auto-generated method stub
-		return specDao.updateSpec(spec);
+		// 去子表中删除
+		specDao.deleteSpecOtions(spec.getId());
+		// 修改主表
+		specDao.updateSpec(spec);	 
+		// 插入子表
+		List<SpecOption> options = spec.getOptions();
+		for (SpecOption specOption : options) {
+			// 设置主表的id
+			specOption.setSpecId(spec.getId());
+			specDao.addOption(specOption);
+		}
+		
+		return 1;
+		 
 	}
 	
 
@@ -81,4 +94,11 @@ public class SpecServiceImpl implements SpecService {
 		return 1;
 	}
 
+	@Override
+	public List<Spec> listAll() {
+		// TODO Auto-generated method stub
+		return specDao.listAll();
+	}
+
+	
 }
