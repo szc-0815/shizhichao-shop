@@ -308,7 +308,7 @@ function selAll(flag){
 			
 		});
 		
-		$("#staticBackdropUpdate").modal('show')
+		$("#staticBackdropUpdate").modal('show');
 	}
 	
 	// 提交修改

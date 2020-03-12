@@ -8,7 +8,7 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-		<!-- 扫描器 -->
+	<!-- 扫描器 -->
 	<context:component-scan
 		base-package="com.shizhichao.controller,com.shizhichao.config,com.shizhichao.listener" />
 	<!-- 视图解析图 -->
@@ -29,7 +29,7 @@
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
 		
 	<!-- 应用程序名称 -->
-	<dubbo:application name="hgshop-manage" />
+	<dubbo:application name="hgshop-web" />
 	<!-- 注册中心 -->
 	<dubbo:registry
 		address="zookeeper://192.168.0.107:2181" />
